@@ -18,6 +18,7 @@ class TagListSerializer(serializers.ModelSerializer):
 
 class PostDetailSerializer(serializers.ModelSerializer):
    
+    tag = TagDetailSerializer(many = True)
 
     class Meta:
         model = Post
@@ -26,6 +27,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
 class PostListSerializer(serializers.ModelSerializer):
 
+    tag = TagDetailSerializer(many = True)
 
     class Meta: 
         model = Post
