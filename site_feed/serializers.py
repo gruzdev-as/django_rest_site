@@ -1,6 +1,6 @@
 '''Serializers''' 
 
-
+from django.core.mail import message
 from .models import Post, Tag
 from rest_framework import serializers
 
@@ -33,4 +33,9 @@ class PostListSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
 
-
+class ContactSerializer(serializers.Serializer):
+    ''' Serializer for feedback form ''' 
+    name = serializers.CharField()
+    title = serializers.CharField()
+    email = serializers.EmailField()
+    message = serializers.CharField()

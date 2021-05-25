@@ -1,8 +1,14 @@
-from .models import Post, Tag
-from .serializers import PostDetailSerializer, PostListSerializer, TagDetailSerializer, TagListSerializer
-from django.shortcuts import render
-from rest_framework import generics
 
+from .models import Post, Tag
+
+from .serializers import *
+
+from django.core.mail import send_mail
+
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 
 class PostCreateView(generics.CreateAPIView):
@@ -36,3 +42,20 @@ class TagDetailView(generics.RetrieveUpdateDestroyAPIView):
     '''RetrieveUpdateDestroy'''
     serializer_class = TagDetailSerializer
     queryset = Tag.objects.all()
+
+class ContactFormView(APIView):
+    '''Feedback form view''' 
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        ''' POST ''' 
+        serializer_class = ContactSerializer(data = request.data)
+        if serializer_class.is_valid():
+            data = serializer_class.validated_data
+            from_email = data.get('email')
+            title = data.get('title')
+            message = data.get('message')
+            send_mail(title, message, from_email, ['Send to email'],)
+
+            return Response({'success' : 'Sent'})
+        

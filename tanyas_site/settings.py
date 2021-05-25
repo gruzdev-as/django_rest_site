@@ -127,3 +127,14 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = BASE_DIR / 'media/'
+
+# My email settings, change after
+# For test i use django.core.mail.backends.console.EmailBackend
+# Use django.core.mail.backends.smtp.EmailBackend after test
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'alexgruzirk@gmail.com'
+EMAIL_HOST_PASSWORD = 'mxhdfnzlwtqwnnyj'

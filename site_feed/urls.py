@@ -1,5 +1,5 @@
 
-from .views import PostCreateView, PostDetailView, PostListView, TagCreateView, TagListView, TagDetailView
+from .views import ContactFormView, PostCreateView, PostDetailView, PostListView, TagCreateView, TagListView, TagDetailView
 from django.contrib import admin
 from django.urls import path, include
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('tag/all/', TagListView.as_view()),
     path('tag/detail/<int:pk>', TagDetailView.as_view()),
 
+    path('feedback/', ContactFormView.as_view()),
 ]
